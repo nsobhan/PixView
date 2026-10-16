@@ -53,6 +53,20 @@ or derived from IrfanView.
 - **Slideshow** with adjustable timing (1–30 s); a playing video is allowed to finish before it moves on
 - Full screen, drag and drop, "Open With" from Finder, rename, move to Trash, reveal in Finder
 
+## Download
+
+Get the latest **PixView-x.y.dmg** from the [Releases page](https://github.com/nsobhan/PixView/releases/latest).
+It runs on both Apple silicon and Intel Macs.
+
+1. Open the DMG and drag **PixView** onto the **Applications** folder.
+2. The first time you open PixView, macOS will block it, because the app is not notarized by Apple
+   (that requires a paid Apple Developer account). To allow it:
+   - Open **System Settings → Privacy & Security**, scroll down, and click **Open Anyway** next to the PixView
+     message, **or**
+   - run `xattr -dr com.apple.quarantine /Applications/PixView.app` in Terminal.
+
+   You only need to do this once.
+
 ## Requirements
 
 - macOS 13 Ventura or later (Apple silicon or Intel)
@@ -65,10 +79,11 @@ git clone <this-repo-url>
 cd PixView
 ./build.sh              # builds build/PixView.app
 ./build.sh --install    # builds and copies it into /Applications
+./make_dmg.sh           # builds a universal app and packages build/PixView-<version>.dmg
 ```
 
-The app is signed for local use only (ad hoc). If you copy it to another Mac, macOS may say it "can't be
-opened". Right-click the app and choose **Open** the first time.
+Apps you build yourself open without any warning. The version number comes from
+`CFBundleShortVersionString` in `Resources/Info.plist`.
 
 To make PixView open pictures by default, select a file in Finder, press ⌘I, choose PixView under **Open with**,
 then click **Change All…**.
@@ -140,6 +155,7 @@ for the full list.
 PixView/
 ├── Package.swift               Swift package (one executable target)
 ├── build.sh                    Builds the .app bundle; --install copies it to /Applications
+├── make_dmg.sh                 Builds a universal app and packages it as a DMG
 ├── Resources/
 │   ├── Info.plist              Bundle info and the file types PixView can open
 │   └── AppIcon.icns
