@@ -157,3 +157,7 @@ PixView/
     ├── VideoPlayerView.swift              Video player and control bar
     └── DocumentSupport.swift              PDF and text viewers
 ```
+
+## License
+
+PixView is released under the [MIT License](LICENSE).
